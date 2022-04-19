@@ -1,0 +1,27 @@
+
+
+CREATE TABLE `traveller`(
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` varchar(100) NOT NULL COMMENT "用户名",
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `ticket`(
+    `id` int NOT NULL AUTO_INCREMENT,
+    `flight_id` int NOT NULL
+    `traveler_id` int NOT NULL
+    `price` float NOT NULL COMMENT "机票价格",
+    `status` int NOT NULL DEFAULT 0 COMMENT "机票状态 0：未预定 1：预定 2：售出"
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `flight`(
+    `id` int NOT NULL AUTO_INCREMENT,
+    `capacity` int NOT NULL COMMENT "航班容量20-80",
+    `base_price` float NOT NULL COMMENT "机票基础价格",
+    `booked_tickets` int NOT NULL DEFAULT 0 COMMENT "机票预定数量",
+    `sell_tickets` int NOT NULL DEFAULT 0 COMMENT "机票售出数量",
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+

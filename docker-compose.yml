@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  flight_order:
+    build: .
+    image: flight_order:v.0
+    command: /bin/bash daemon.sh
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    environment:
+      SQL_HOST: mysql
+      SQL_USER: flight
+      SQL_PWD: test
+      SQL_DB: flight
+
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql/mysql-server
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: flight
+    volumes:
+      - ./sql/init/:/docker-entrypoint-initdb.d/
+
+  redis:
+    image: redis
+    command: ["redis-server", "--appendonly", "yes", "--requirepass","test"]
+
